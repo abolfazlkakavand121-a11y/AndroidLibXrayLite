@@ -12,7 +12,8 @@ on:
   push:
     branches:
       - main
-      - feature/xray-corexr-tls-record
+      - feature/xray-corexr
+      - feature/tls-record-version-override-tls-record
 
 jobs:
   build:
