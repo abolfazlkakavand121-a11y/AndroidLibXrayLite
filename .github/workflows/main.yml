@@ -30,10 +30,12 @@ jobs:
       with:
         go-version-file: 'go.mod'
 
-    - name: Install gomobile
+    - name: Install pinned gomobile
       run: |
-        go install golang.org/x/mobile/cmd/gomobile@latest
-        export PATH=$PATH:~/go/bin
+        MOBILE_VERSION="$(go list -m -f '{{.Version}}' golang.org/x/mobile)"
+        test -n "$MOBILE_VERSION"
+        go install "golang.org/x/mobile/cmd/gomobile@${MOBILE_VERSION}"
+        echo "$HOME/go/bin" >> "$GITHUB_PATH"
         
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
